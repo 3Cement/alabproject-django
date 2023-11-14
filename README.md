@@ -40,6 +40,7 @@ python load_data.py <ścieżka_do_pliku_csv>
 7. Sprawdź wczytane dane.
 Po wykonaniu skryptu sprawdź bazę danych, aby upewnić się, że dane zostały poprawnie wczytane:
 - Zaloguj się do panelu administratora Django (http://localhost:8000/admin/) i przejrzyj modele Patient, Test, TestResult oraz Order, aby zobaczyć wczytane dane.
+8. Pamiętaj aby utworzyć plik .env i przekazać tam `SECRET_KEY=twój_super_tajny_klucz` który będzie następnie przekazywany do `settings` za pomocą `load_dotenv`
 
 ## Punkty końcowe API
 Punkty Autentykacyjne
