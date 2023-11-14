@@ -1,0 +1,133 @@
+{
+    "patient":
+    {
+        "id": 10,
+        "name": "John",
+        "surname": "Smith",
+        "sex": "m",
+        "birthDate": "2021-01-01"
+    },
+    "orders":
+    [
+        {
+            "orderId": "20",
+            "results":
+            [
+                {
+                    "name": "foo",
+                    "value": "1",
+                    "reference": "1-2"
+                },
+                {
+                    "name": "bar",
+                    "value": "2",
+                    "reference": "1-2"
+                }
+            ]
+        },
+        {
+            "orderId": "21",
+            "results":
+            [
+                {
+                    "name": "foo",
+                    "value": "1",
+                    "reference": "1-2"
+                },
+                {
+                    "name": "bar",
+                    "value": "2",
+                    "reference": "1-2"
+                }
+            ]
+        }
+    ]
+}
+
+
+{
+    "patient": [{
+        "id": "1",
+        "name": "Piotr",
+        "surname": "Kowalski",
+        "sex": "male",
+        "birthDate": "1983-04-12",
+        "orders": [{
+            "orderId": "1",
+            "results": [{
+                "name": "Protoporfiryna cynkowa",
+                "value": "4.0",
+                "reference": "< 40,0"
+            }, {
+                "name": "Wolna trijodotyronina (FT3) (O55)",
+                "value": "4.00",
+                "reference": "2,30 - 4,20"
+            }]
+        }, {
+            "orderId": "2",
+            "results": [{
+                "name": "Tyreotropina (TSH)  trzeciej generacji (L69)",
+                "value": "334,000 µIU/ml",
+                "reference": "0,550 - 4,780"
+            }, {
+                "name": "Urobilinogen",
+                "value": "prawidłowy",
+                "reference": "prawidłowy"
+            }]
+        }]
+    }, {
+        "id": "2",
+        "name": "Anna",
+        "surname": "Jabłońska",
+        "sex": "female",
+        "birthDate": "2002-12-12",
+        "orders": [{
+            "orderId": "3",
+            "results": [{
+                "name": "Cholesterol LDL - wyliczany (K03)",
+                "value": "42",
+                "reference": "<70 - Dla bardzo dużego ryzyka > 10% wg skali SCORE\\X0A\\<100 - Dla dużego ryzyka 5 - 10% wg skali SCORE\\X0A\\<115 - Dla umiarkowanego lub małego ryzyka < 5% wg skali SCORE"
+            }, {
+                "name": "Azotyny",
+                "value": "nieobecne",
+                "reference": "nieobecne"
+            }]
+        }]
+    }, {
+        "id": "3",
+        "name": "Andrzej",
+        "surname": "Kowalski",
+        "sex": "male",
+        "birthDate": "2020-01-31",
+        "orders": [{
+            "orderId": "4",
+            "results": [{
+                "name": "Krew",
+                "value": "nieobecna",
+                "reference": "nieobecna"
+            }]
+        }, {
+            "orderId": "5",
+            "results": [{
+                "name": "Insulina (L97)",
+                "value": "7.40",
+                "reference": "3,00 - 17,00"
+            }]
+        }]
+    }, {
+        "id": "4",
+        "name": "Bożena",
+        "surname": "Wiśniewska",
+        "sex": "female",
+        "birthDate": "2021-11-21",
+        "orders": [{
+            "orderId": "6",
+            "results": [{
+                "name": "Przejrzystość",
+                "value": "przejrzysty",
+                "reference": ""
+            }]
+        }]
+    }],
+    "orders": []
+}
