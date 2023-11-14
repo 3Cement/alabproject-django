@@ -4,11 +4,12 @@
 Aplikacja ta pozwala na wczytywanie wyników badań laboratoryjnych z pliku CSV do bazy danych oraz udostępnia te dane poprzez interfejs API.
 https://github.com/3Cement/alabproject-django.git
 ## Instalacja
-1. Sklonuj repozytorium na swój lokalny komputer lub rozpakuj archiwum. 
+1. Sklonuj repozytorium na swój lokalny komputer lub rozpakuj archiwum.
 ```bash
 git clone https://github.com/3Cement/alabproject-django.git
 cd alabproject-django
 ```
+- Zauważ że w głównym folderze znajduje się plik csv z wynikami badań, treść zadania w main_task_info oraz przykład odpowiedzi z API w formacje JSON.
 2. Utwórz wirtualne środowisko (opcjonalne, ale zalecane): 
 ```bash
 python -m venv env
