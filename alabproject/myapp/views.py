@@ -4,20 +4,27 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
 from .models import Patient, Order, TestResult
 from .serializers import (
     PatientSerializer,
     TokenSerializer,
     LoginSerializer,
 )
-from django.shortcuts import get_object_or_404
-from django.contrib.auth import authenticate
-from rest_framework_simplejwt.tokens import RefreshToken
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 
 class LoginAPIView(APIView):
+    """
+    Provides authentication for users to obtain JWT tokens.
+
+    Methods:
+    - post: Authenticates users and generates JWT tokens.
+    """
+
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -29,6 +36,15 @@ class LoginAPIView(APIView):
         )
     )
     def post(self, request):
+        """
+        Authenticates users and generates JWT tokens.
+
+        Args:
+        - request (HttpRequest): HTTP request object.
+
+        Returns:
+        - Response: JWT tokens or error message.
+        """
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = authenticate(
@@ -49,10 +65,27 @@ class LoginAPIView(APIView):
 
 
 class ResultsAPIView(APIView):
+    """
+    Provides access to test results for authenticated users.
+
+    Methods:
+    - get: Retrieves test results for all patients.
+    """
+
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(security=[{"Bearer": []}])
-    def get(self, request):
+    def get(self):
+        """
+        Retrieves test results for all patients.
+
+        Args:
+        - None
+
+        Returns:
+        - Response: Serialized test results data.
+        """
+
         patients = Patient.objects.all()
         serialized_data = []
 
@@ -89,10 +122,32 @@ class ResultsAPIView(APIView):
 
 
 class PatientResultsAPIView(APIView):
+    """
+    Provides access to test results for a specific patient.
+
+    Methods:
+    - get: Retrieves test results for a specific patient.
+
+    Args:
+    - patient_id (int): Identifier of the patient.
+
+    Returns:
+    - Response: Serialized test results data for the specified patient.
+    """
+
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(security=[{"Bearer": []}])
-    def get(self, request, patient_id):
+    def get(self, patient_id):
+        """
+        Retrieves test results for a specific patient.
+
+        Args:
+        - patient_id (int): Identifier of the patient.
+
+        Returns:
+        - Response: Serialized test results data for the specified patient.
+        """
         patient = get_object_or_404(Patient, id=patient_id)
         orders = Order.objects.filter(patient=patient)
         serialized_orders = []
@@ -127,19 +182,58 @@ class PatientResultsAPIView(APIView):
 
 
 class PatientAPIView(APIView):
-    def get(self, request, patient_id):
+    """
+    Provides access to a specific patient's details.
+
+    Methods:
+    - get: Retrieves details of a specific patient.
+
+    Args:
+    - patient_id (int): Identifier of the patient.
+
+    Returns:
+    - Response: Serialized data for the specified patient.
+    """
+
+    def get(self, patient_id):
+        """
+        Retrieves details of a specific patient.
+
+        Args:
+        - patient_id (int): Identifier of the patient.
+
+        Returns:
+        - Response: Serialized data for the specified patient.
+        """
         patient = get_object_or_404(Patient, id=patient_id)
         serializer = PatientSerializer(patient)
         return Response(serializer.data)
 
 
 class TokenObtainPairWithIDSerializer(TokenObtainPairSerializer):
+    """
+    Custom token serializer including user ID in the token payload.
+    """
+
     @classmethod
     def get_token(cls, user):
+        """
+        Overrides base method to include user ID in token payload.
+
+        Args:
+        - user: User instance.
+
+        Returns:
+        - Token: JWT token with user ID.
+        """
         token = super().get_token(user)
         token["id"] = user.id
         return token
 
 
 class TokenObtainPairWithIDView(TokenObtainPairView):
+    """
+    Custom view for obtaining JWT tokens with user ID.
+    """
+
     serializer_class = TokenObtainPairWithIDSerializer

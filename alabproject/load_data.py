@@ -1,5 +1,34 @@
 """
-    Python Script to download and pass lab results data from .csv file to database.
+Python Script to load laboratory results data from a .csv file into a database.
+
+This script reads data from a .csv file containing lab results and populates the database
+with the retrieved information.
+
+Usage:
+    Ensure Django settings are correctly set to 'alabproject.settings'.
+    Run the script with the CSV file path as the sole argument.
+
+CSV File Format:
+    The CSV file should contain columns: 
+        - patientId
+        - patientName
+        - patientSurname
+        - patientSex
+        - patientBirthDate
+        - orderId
+        - testName
+        - testReference
+        - testValue
+
+The script parses the CSV file and creates model objects (Patient, Order, Test, TestResult)
+based on the provided data, adding them to the database.
+
+Exceptions:
+    - Handles FileNotFoundError if the specified file path is invalid or the file doesn't exist.
+    - Catches general exceptions and displays an error message in case of unexpected issues.
+
+Example:
+    python script_name.py path/to/csv_file.csv
 """
 
 import os
@@ -17,9 +46,7 @@ from datetime import datetime
 
 
 def load_data(file_path):
-    print("load_data", load_data)
     try:
-        print("TRY")
         with open(file_path, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file, delimiter=";")
             loaded_data = 0
@@ -67,10 +94,8 @@ def load_data(file_path):
             print(f"{loaded_data} records loaded successfully to database.")
 
     except FileNotFoundError as e:
-        print("TUTAJ_FileNotFoundError", FileNotFoundError)
         print(f"File not found: {e}")
     except Exception as e:
-        print("TUTAJ_FileNotFoundError", Exception)
         print(f"An error occurred: {e}")
 
 

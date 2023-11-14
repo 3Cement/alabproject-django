@@ -1,3 +1,15 @@
+"""
+Module defining URL patterns for API endpoints.
+
+This module contains URL configurations that map specific endpoints to corresponding views.
+
+URL Patterns:
+    - '/login/': Endpoint to authenticate users and generate JWT tokens using LoginAPIView.
+    - '/results/': Endpoint to retrieve lab results data using ResultsAPIView.
+    - '/results/<int:patient_id>/': Endpoint to retrieve specific patient results using PatientResultsAPIView.
+    - '/patient/<int:patient_id>/': Endpoint to retrieve information about a specific patient using PatientAPIView.
+"""
+
 from django.urls import path
 from .views import (
     ResultsAPIView,
