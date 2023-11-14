@@ -1,0 +1,7 @@
+# Pliki środowiskowe
+.env
+
+# Katalogi i pliki wirtualnego środowiska Pythona
+venv/
+*.pyc
+__pycache__/
